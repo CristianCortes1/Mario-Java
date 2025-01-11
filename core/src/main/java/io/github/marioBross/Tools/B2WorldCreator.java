@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Array;
 import io.github.marioBross.MarioBross;
 import io.github.marioBross.Screens.PlayScreen;
 import io.github.marioBross.sprites.enemies.Enemy;
-import io.github.marioBross.sprites.enemies.Hunter;
 import io.github.marioBross.sprites.enemies.Turtle;
 import io.github.marioBross.sprites.tileObjects.Brick;
 import io.github.marioBross.sprites.tileObjects.Coin;
@@ -20,7 +19,6 @@ public class B2WorldCreator {
     private TiledMap map;
     private Array<Goomba> goombas;
     private static Array<Turtle> turtles;
-    private Array<Enemy> hunters;
 
     public B2WorldCreator(PlayScreen screen) {
         this.world = screen.getWorld();
@@ -108,12 +106,6 @@ public class B2WorldCreator {
 
             body.createFixture(fdef);
         }
-        //create hunters
-        hunters = new Array<>();
-        for (RectangleMapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = object.getRectangle();
-            hunters.add(new Hunter(screen, rect.getX() / MarioBross.PPM, rect.getY() / MarioBross.PPM));
-        }
 
 
     }
@@ -122,7 +114,6 @@ public class B2WorldCreator {
         Array<Enemy> enemies = new Array<>();
         enemies.addAll(goombas);
         enemies.addAll(turtles);
-        enemies.addAll(hunters);
         return enemies;
     }
 
